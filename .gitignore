@@ -1,0 +1,13 @@
+# Local environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# SQL Server backup files
+docker/mssql/backups/*.bak
+docker/mssql/backups/*.back
+
+# SQL Server local data files
+*.mdf
+*.ndf
+*.ldf
