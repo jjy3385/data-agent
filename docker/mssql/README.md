@@ -441,7 +441,37 @@ docker compose ps
 127.0.0.1:14330->1433/tcp
 ```
 
-## 11. 보안 원칙
+## 11. 애플리케이션 Read-Only 계정
+
+Python 애플리케이션은 SQL Server 관리 계정인 `sa`를 사용하지 않고
+`data_agent_ro`를 사용한다.
+
+`data_agent_ro`의 `AdventureWorks2022` 권한은 다음과 같다.
+
+- `db_datareader`: 모든 사용자 테이블과 View를 조회할 수 있다.
+- `db_denydatawriter`: 사용자 테이블의 `INSERT`, `UPDATE`, `DELETE`를 거부한다.
+- 데이터베이스 수준 `EXECUTE` 권한을 거부한다.
+- DDL 및 서버 관리 권한을 부여하지 않는다.
+
+애플리케이션은 다음 환경변수로 접속 정보를 읽는다.
+
+| 환경변수 | 로컬 개발 값 또는 용도 |
+|---|---|
+| `TARGET_DB_HOST` | `127.0.0.1` |
+| `TARGET_DB_PORT` | `14330` |
+| `TARGET_DB_NAME` | `AdventureWorks2022` |
+| `TARGET_DB_USER` | `data_agent_ro` |
+| `TARGET_DB_PASSWORD` | Read-Only 계정 비밀번호 |
+| `TARGET_DB_DRIVER` | `ODBC Driver 18 for SQL Server` |
+| `TARGET_DB_ENCRYPT` | 로컬에서도 암호화 연결을 사용하므로 `yes` |
+| `TARGET_DB_TRUST_SERVER_CERTIFICATE` | 로컬 자체 서명 인증서이므로 `yes` |
+
+실제 비밀번호는 Git에서 제외되는 루트 `.env`에만 저장한다. 현재 로컬
+튜토리얼 환경에서는 `TARGET_DB_PASSWORD`가 `MSSQL_SA_PASSWORD`를 참조하지만,
+운영 환경에서는 반드시 별도 비밀번호와 비밀 저장소를 사용한다.
+`.env.example`에는 실제 비밀번호를 기록하지 않는다.
+
+## 12. 보안 원칙
 
 - `sa`는 로컬 초기 구성과 관리에만 사용한다.
 - 애플리케이션은 이후 별도의 최소 권한 read-only 로그인을 사용한다.
