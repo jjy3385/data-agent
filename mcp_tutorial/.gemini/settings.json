@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "adventureworks-db": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "server.py"
+      ]
+    }
+  }
+}

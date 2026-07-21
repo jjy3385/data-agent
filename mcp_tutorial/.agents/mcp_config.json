@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "adventureworks-db": {
+      "command": "C:\\workspace\\data-agent\\mcp_tutorial\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\workspace\\data-agent\\mcp_tutorial\\server.py"
+      ],
+      "cwd": "C:\\workspace\\data-agent\\mcp_tutorial"
+    }
+  }
+}
