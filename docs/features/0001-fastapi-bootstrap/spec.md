@@ -3,7 +3,7 @@
 > 이 문서는 후속 Backend Feature를 구현하기 전에 필요한 최소 애플리케이션 실행 기반의 요구사항과 범위를 정의한다. 기술 의존성, 함수명, 파일 배치와 구현 순서는 Spec 승인 후 작성할 `plan.md`에서 결정한다.
 
 * Feature ID: `FEAT-0001`
-* Status: `Draft`
+* Status: `Approved`
 * Roadmap: [Week 1 - FastAPI 프로젝트 기본 구조](../../mvp/roadmap.md#week-1-business-metadata--security-foundation)
 
 ## 목적

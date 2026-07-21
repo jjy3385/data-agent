@@ -6,6 +6,8 @@
 
 * Feature ID: `FEAT-NNNN`
 * Status: `Draft`
+* Development Track: `<Lightweight | Standard>`
+* Track 선택 근거: `<features/README.md의 기준에 따른 한 문장>`
 * Roadmap: `<link>`
 
 ## 목적

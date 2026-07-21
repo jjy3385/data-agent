@@ -11,3 +11,9 @@ docker/mssql/backups/*.back
 *.mdf
 *.ndf
 *.ldf
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
