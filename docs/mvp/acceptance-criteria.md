@@ -27,11 +27,11 @@ Golden Query는 사람이 업무 정의와 결과를 검증한 기준 SQL이다.
 * [ ] Read-Only Query Executor는 DB Query Timeout과 Maximum Returned Rows를 강제한다.
 * [ ] 공유 MCP Client Session을 사용하는 대상 DB 실행 요청은 Backend에서 직렬화된다.
 * [ ] Agent Workflow는 최대 Depth 2, SQL Self-Healing은 실행당 1회를 초과하지 않는다.
-* [ ] `LLM_DEPLOYMENT_MODE=private`와 승인된 Private Endpoint만 사용한다.
-* [ ] Raw Result 전체 대신 TOP N과 허용 컬럼을 적용한 최소 Projection만 LLM에 전달한다.
+* [ ] LLM Client는 Provider 교체가 가능한 공통 인터페이스를 사용한다.
+* [ ] Depth 2 판단에는 TOP N, 허용 컬럼과 Maximum Returned Rows가 적용된 Bounded Result를 Result Handle 없이 LLM에 직접 전달한다.
 * [ ] LLM Next Action은 허용 행동으로 제한하고 Depth 2 대상은 Backend가 Depth 1 결과 안에서 선택한다.
 * [ ] Slack 응답에 기준일, 계산식, 판단 근거와 데이터 한계가 포함된다.
-* [ ] Intent, Context, Plan, SQL, Projection과 실행 단계가 하나의 Correlation ID로 연결된다.
+* [ ] Intent, Context, Plan, SQL, Bounded Result와 실행 단계가 하나의 Correlation ID로 연결된다.
 * [ ] 오류 신고가 원래 실행 이력과 연결된다.
 
 ## 관련 문서

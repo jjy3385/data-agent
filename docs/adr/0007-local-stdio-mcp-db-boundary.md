@@ -62,7 +62,7 @@ FastAPI는 공식 MCP SDK의 Client를 사용하며 MCP Wire Protocol을 직접 
 
 10. 요청 처리 중 MCP 장애가 발생해도 FastAPI는 대상 DB 직접 실행으로 우회하지 않는다.
 
-11. 운영용 MCP Server는 FastAPI가 관리하는 내부 실행 구성요소(Component)이다. Public LLM Host에 등록하지 않으며 검증된 Backend Workflow 밖에서 제한 없는 SQL 실행 Tool을 제공하지 않는다.
+11. 운영용 MCP Server는 FastAPI가 관리하는 내부 실행 구성요소(Component)이다. 외부 또는 범용 LLM 애플리케이션에 직접 등록하지 않으며 검증된 Backend Workflow 밖에서 제한 없는 SQL 실행 Tool을 제공하지 않는다.
 
 12. MVP Transport는 로컬 `stdio`만 지원한다. Streamable HTTP, Remote MCP 배포, 서비스 간 인증 및 Horizontal Scaling은 Post-MVP에서 검토한다.
 

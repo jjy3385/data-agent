@@ -33,17 +33,17 @@
 
 11. **MCP Read-Only Query 실행:** MCP Client Manager가 검증 완료 SQL과 바인딩 파라미터, Correlation ID, DB Query Timeout과 Maximum Returned Rows를 `execute_readonly_query`에 전달한다. MCP Server는 최소 실행 안전성을 재검증한 뒤 Read-Only 계정으로 조회한다.
 
-12. **제한된 Result Context 생성:** Backend가 Raw Result에 TOP N, 허용 컬럼과 데이터 최소화 정책을 적용해 Result Summary와 LLM Projection을 만든다.
+12. **Bounded Result 확인 및 Direct 전달:** Backend가 MCP 실행 결과에 TOP N, 허용 컬럼과 Maximum Returned Rows가 적용됐는지 확인하고 Result Handle 없이 LLM에 직접 전달한다.
 
-13. **Private LLM Next Action:** Private LLM이 최소 Projection을 바탕으로 `STOP`, `DRILL_DOWN`, `ASK_CLARIFICATION` 중 하나를 반환한다.
+13. **LLM Next Action:** LLM이 Bounded Result를 바탕으로 `STOP`, `DRILL_DOWN`, `ASK_CLARIFICATION` 중 하나를 반환한다.
 
-14. **Backend 대상 선택:** Backend가 행동을 검증하고 Depth 1 Raw Result 안에서만 Depth 2의 실제 대상과 PK를 제한된 수로 선택한다.
+14. **Backend 대상 선택:** Backend가 행동을 검증하고 Depth 1 Bounded Result 안에서만 Depth 2의 실제 대상과 PK를 제한된 수로 선택한다.
 
 15. **Depth 2 Plan·SQL·실행:** Depth 1과 같은 Plan Validation, SQL Guardrail과 MCP 실행 경계를 적용한다.
 
 16. **근거 기반 XAI와 최종 응답:** Backend가 실제 Plan, Metadata, SQL, 데이터 기준일, 계산식과 한계로 XAI Payload를 구성하고 LLM은 그 범위 안에서 설명을 작성한다.
 
-17. **Audit 및 오류 신고:** Intent, Metadata Context, Plan, SQL, Guardrail, Projection, Next Action, 실행 시간, 조회 행 수와 응답을 Correlation ID로 연결한다.
+17. **Audit 및 오류 신고:** Intent, Metadata Context, Plan, SQL, Guardrail, Bounded Result, Next Action, 실행 시간, 조회 행 수와 응답을 Correlation ID로 연결한다.
 
 ## Self-Healing 경계
 

@@ -15,7 +15,7 @@ FastAPI 백엔드는 Workflow Orchestrator 역할을 담당한다. LLM의 제안
 │ · Correlation ID · Role/ACL · RuntimeIntent    │
 │ · QueryPlan · SQL Guardrail · XAI/Audit        │
 └───────────────┬───────────────┬─────────────────┘
-                │              └────────────▶ Private LLM
+                │              └────────────▶ LLM Provider
                 ├─────────────────────▶ Admin DB
                 │                       Metadata · Policy · Audit
                 │ 검증 완료 SQL + 실행 제한
@@ -45,7 +45,7 @@ FastAPI 백엔드는 Workflow Orchestrator 역할을 담당한다. LLM의 제안
 * SQL Guardrail을 통과한 SQL만 MCP Client Manager에 전달한다.
 * 대상 DB 접근은 승인된 MCP Tool을 통해서만 수행한다.
 * MCP 장애 시 FastAPI의 직접 DB 실행 경로로 우회하지 않는다.
-* Raw Result는 Backend Workflow 안에서만 유지하고 LLM에는 최소 Projection만 제공한다.
+* MVP에서는 TOP N, 허용 컬럼과 Maximum Returned Rows가 적용된 Bounded Result를 Result Handle 없이 LLM에 직접 전달한다.
 
 ## 관련 문서
 

@@ -12,7 +12,7 @@ MVP는 Business Metadata와 Security Foundation을 먼저 만들고 RuntimeInten
 * [ ] Admin DB(SQLite) DDL (`users`, `audit_logs`, `table_policies`, `error_reports`)
 * [ ] MCP Server 전용 AdventureWorks2022 Read-Only 연결
 * [ ] 대상 MSSQL 카탈로그·Physical FK 수집용 MCP Schema Inspection Tool
-* [ ] `LLM_DEPLOYMENT_MODE=private`와 승인 Endpoint 구성 검증
+* [ ] Provider 교체 가능한 LLM Client와 환경설정 검증
 * [ ] 대표 질문용 Entity, Dimension, Metric과 Time Policy
 * [ ] Metadata Alias·Keyword Catalog와 RuntimeIntent Contract
 * [ ] 테이블·컬럼 Allowlist와 승인 Join Metadata
@@ -40,21 +40,22 @@ MVP는 Business Metadata와 Security Foundation을 먼저 만들고 RuntimeInten
 
 ## Week 3: Depth 2, XAI & Slack
 
-* [ ] TOP N·허용 컬럼 기반 Result Summary와 최소 LLM Projection
-* [ ] Private LLM Next Action과 Backend 대상 선택
+* [ ] TOP N·허용 컬럼·Maximum Rows가 적용된 Bounded Result 직접 전달
+* [ ] LLM Next Action과 Backend 대상 선택
 * [ ] Depth 2 QueryPlan 검증, LLM SQL 생성과 Guardrail
 * [ ] 최대 2-Depth, 실행당 1-Retry와 Self-Healing
 * [ ] Backend 근거 Payload 기반 XAI 응답
 * [ ] Slack Bot 연동
-* [ ] Correlation ID 기반 Intent·Plan·SQL·Projection Audit Log
+* [ ] Correlation ID 기반 Intent·Plan·SQL·Bounded Result Audit Log
 
 ## Week 4: Failure Paths & E2E
 
 * [ ] 역할별 허용·거부 E2E 테스트
-* [ ] Private LLM Mode와 Endpoint Allowlist 검증 테스트
+* [ ] LLM Provider 설정과 Client 교체 가능성 검증 테스트
 * [ ] 위험 SQL 차단 E2E 테스트
 * [ ] 잘못된 QueryPlan과 Plan-SQL 불일치 차단 테스트
-* [ ] Raw Result 과다 노출과 허용 범위 밖 Depth 2 대상 차단 테스트
+* [ ] Bounded Result의 행·컬럼 제한과 Result Handle 없는 Direct 전달 테스트
+* [ ] 허용 범위 밖 Depth 2 대상 차단 테스트
 * [ ] SQL 오류와 1-Retry E2E 테스트
 * [ ] MCP 시작·초기화·Tool Contract 실패와 실행 중 연결 종료 테스트
 * [ ] FastAPI 종료 시 MCP Session과 하위 프로세스 정상 종료 테스트

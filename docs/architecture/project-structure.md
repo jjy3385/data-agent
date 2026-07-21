@@ -18,7 +18,7 @@
 │   └── services/
 │       ├── schema_collector.py      # MCP Tool 결과 → 카탈로그·Physical FK 후보
 │       ├── metadata_service.py      # 승인 Metadata, Join, 지표와 정책
-│       ├── llm_client.py            # Private LLM 공통 Client
+│       ├── llm_client.py            # Provider 독립 LLM Client
 │       ├── intent_resolver.py       # 자연어 → RuntimeIntent
 │       ├── metadata_retriever.py    # Intent·ACL 기반 Metadata 검색
 │       ├── context_builder.py       # Retrieval 결과 → 제한된 Context

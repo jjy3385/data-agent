@@ -34,6 +34,6 @@ MVP XAI Payload에는 최소한 다음 논리 정보가 포함된다.
 
 ## 관련 문서
 
-* [Result Projection Contract](result-projection.md)
+* [Result Context Contract](result-context.md)
 * [질문 처리 시퀀스](../architecture/query-execution-sequence.md)
 * [MVP 완료 기준](../mvp/acceptance-criteria.md)
