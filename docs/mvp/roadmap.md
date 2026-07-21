@@ -9,6 +9,7 @@ MVP는 Business Metadata와 Security Foundation을 먼저 만들고 RuntimeInten
 ## Week 1: Business Metadata & Security Foundation
 
 * [ ] FastAPI 프로젝트 기본 구조
+  * Feature: [FEAT-0001 FastAPI Bootstrap](../features/0001-fastapi-bootstrap.md)
 * [ ] Admin DB(SQLite) DDL (`users`, `audit_logs`, `table_policies`, `error_reports`)
 * [ ] MCP Server 전용 AdventureWorks2022 Read-Only 연결
 * [ ] 대상 MSSQL 카탈로그·Physical FK 수집용 MCP Schema Inspection Tool
