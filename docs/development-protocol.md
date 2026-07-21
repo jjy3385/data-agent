@@ -1,6 +1,6 @@
 # AI-Assisted Development Protocol
 
-> 이 문서는 Feature Specification을 실제 코드와 테스트로 구현할 때 사용하는 작업 단위, AI 요청 방식과 검토 절차를 정의한다. 큰 기능의 범위와 완료 조건은 `docs/features/`, 프로젝트 방향과 설계 경계는 README, ADR, Architecture와 Contract를 따른다.
+> 이 문서는 승인된 Feature Tasks를 실제 코드와 테스트로 구현할 때 사용하는 작업 단위, AI 요청 방식과 검토 절차를 정의한다. `Spec → Plan → Tasks` 전체 흐름은 [Feature 기반 개발 안내](features/README.md)를, 프로젝트 방향과 설계 경계는 README, ADR, Architecture와 Contract를 따른다.
 
 ## 1. 역할 분리
 
@@ -9,29 +9,33 @@
 
 ## 2. Feature 기반 작업
 
-여러 파일, 공개 Interface, Lifecycle, 보안 경계 또는 여러 테스트가 필요한 기능은 구현 전에 [`docs/features/`](features/README.md)에 Feature Specification을 작성한다.
+여러 파일, 공개 Interface, Lifecycle, 보안 경계 또는 여러 테스트가 필요한 기능은 [`docs/features/`](features/README.md) 아래에서 다음 순서로 진행한다.
 
-작업 순서:
+1. 사용자와 AI가 `spec.md`에 무엇을 왜 만드는지 정의한다.
+2. 사용자가 Spec을 검토하고 `Approved`로 변경한다.
+3. Claude Code가 Approved Spec과 관련 기준 문서를 읽고 `plan.md`를 생성한다. 이 단계에서는 코드와 Tasks를 만들지 않는다.
+4. Codex와 Gemini가 Plan을 독립적으로 검토하고 사용자가 반영 여부를 결정한다.
+5. Claude Code가 결정된 의견을 Plan의 `교차 검토` 절과 설계에 반영한다.
+6. 사용자가 Plan을 검토하고 `Approved`로 변경한다.
+7. Claude Code가 Approved Spec과 Plan으로 `tasks.md`를 생성한다. 이 단계에서는 코드를 만들지 않는다.
+8. Spec, Plan과 Tasks의 Coverage, 충돌과 의존 순서를 검토한 뒤 사용자가 Tasks를 `Approved`로 변경한다.
+9. Claude Code가 Task 하나씩 코드와 관련 테스트를 구현한다.
+10. Codex와 Gemini가 구현을 검토하고 결과를 Tasks에 반영한다.
+11. 모든 Acceptance Criteria와 검증이 충족되면 Tasks를 `Verified`로 변경하고 Roadmap을 완료 처리한다.
 
-1. Roadmap에서 다음 책임 단위를 선택한다.
-2. 관련 ADR, Architecture와 Contract를 확인한다.
-3. Feature Specification을 `Draft`로 작성한다.
-4. 범위, 공개 경계, 실패 동작, 미결정 사항과 완료 조건을 검토하고 `Approved`로 변경한다.
-5. 첫 Task를 시작할 때 `In Progress`로 변경한다.
-6. Feature를 작고 검토 가능한 구현 Task로 나눈다.
-7. AI Agent에는 Task 하나씩 요청한다.
-8. 각 코드 동작과 관련 테스트를 같은 Task에서 구현하고 직접 검토한다.
-9. Feature 전체 검증과 검증 기록을 완료한 후 `Verified`로 변경한다.
-10. Roadmap 항목을 완료 처리한다.
-
-Feature Specification이 있더라도 AI Agent에게 Feature 전체를 한 번에 구현하도록 요청하지 않는다. 각 Task는 아래의 원자 단위 개발 프로토콜을 따른다.
+상위 문서는 자동으로 하위 문서와 동기화되지 않는다. Approved Spec이 변경되면 Plan과 Tasks를, Approved Plan이 변경되면 Tasks를 재검토한다. 일관성이 다시 확인될 때까지 영향받는 구현을 중단한다.
 
 ```text
-Feature Specification
-  → 작은 구현 Task
-  → 함수·모델·쿼리와 해당 테스트
-  → Feature 전체 검증
+spec.md       무엇을 왜 만드는가
+  ↓ Approved
+plan.md       기술적으로 어떻게 구현하는가
+  ↓ Approved
+tasks.md      어떤 순서와 단위로 구현하는가
+  ↓ Approved
+코드와 테스트
 ```
+
+각 구현 Task는 아래의 원자 단위 개발 프로토콜을 따른다.
 
 ## 3. 원자 작업 단위
 
@@ -72,11 +76,12 @@ AI에게 요청하지 않는 단위:
 제약:
 실패 케이스:
 기존 코드:
-관련 Feature Specification:
+관련 Feature 디렉터리:
+현재 Task ID:
 원하는 스타일:
 
 주의:
-- Feature Specification 또는 현재 Task에 명시되지 않은 새 파일을 만들지 마.
+- Approved Plan 또는 현재 Task에 명시되지 않은 새 파일을 만들지 마.
 - 외부 라이브러리를 임의로 추가하지 마.
 - 요청한 동작의 정상·실패 테스트를 함께 작성해.
 - 50줄 이내로 작성해.

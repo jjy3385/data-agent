@@ -12,7 +12,7 @@
 2. 기능 범위가 불명확하면 `docs/mvp/scope.md`를 확인한다.
 3. 구현 순서나 현재 우선순위를 판단할 때는 `docs/mvp/roadmap.md`를 확인한다.
 4. 변경 대상과 관련된 Architecture, Contract와 ADR을 코드보다 먼저 읽는다.
-5. 구현 대상에 `Approved` 또는 `In Progress` 상태의 Feature Specification이 있으면 해당 문서의 범위, Task와 완료 조건을 확인한다.
+5. Feature 작업이면 `docs/features/README.md`와 해당 디렉터리의 `spec.md`, `plan.md`, `tasks.md` 중 현재 단계에 존재하는 문서를 확인한다.
 6. 기존 사용자 변경사항을 보존하고 현재 작업과 관련 없는 파일을 수정하지 않는다.
 
 ## 문서 선택 기준
@@ -24,7 +24,7 @@
 | 정확한 입출력, 타입과 불변조건 | `docs/contracts/` |
 | 설계 결정, 대안과 선택 이유 | `docs/adr/` |
 | MVP 범위, 로드맵과 완료 기준 | `docs/mvp/` |
-| 현재 구현할 기능의 범위와 완료 조건 | `docs/features/` |
+| 현재 기능의 요구사항, 구현 계획과 실행 Task | `docs/features/` |
 | 개발 작업 단위와 검토 절차 | `docs/development-protocol.md` |
 
 세부 문서를 찾기 어렵다면 `docs/README.md`에서 시작한다.
@@ -67,14 +67,17 @@
 8. Timeout은 계층별로 구분한다. MCP Client Manager는 MCP Call Timeout, MCP Server는 DB Query Timeout을 담당한다.
 9. 새 기능에는 정상 경로뿐 아니라 권한 거부, Contract 오류, Timeout, 연결 종료와 Fail Closed 경로를 고려한다.
 10. 문서 상단에는 한글로 목적, 범위와 관련 문서를 설명하고 영어 기술 용어는 필요한 경우 병기한다.
-11. Feature Specification이 있는 작업은 해당 문서의 포함·제외 범위, 공개 경계와 완료 조건을 따른다.
-12. Feature가 여러 책임을 포함하면 작고 검토 가능한 Task로 나누며, 코드 동작과 관련 테스트를 같은 Task에서 다룬다.
-13. Feature Specification과 ADR, Architecture 또는 Contract가 충돌하면 구현을 중단하고 충돌 위치와 영향을 먼저 보고한다.
+11. Feature 작업은 `Spec → Plan → Tasks → 구현` 순서를 따른다.
+12. `spec.md`가 `Approved`가 아니면 `plan.md`를 생성하지 않는다. Plan 작성·수정 요청에서는 구현 코드와 `tasks.md`를 만들지 않는다.
+13. `plan.md`가 `Approved`가 아니면 `tasks.md`를 생성하지 않는다. Tasks 작성·수정 요청에서는 구현 코드를 만들지 않는다.
+14. `tasks.md`가 `Approved`가 아니면 구현을 시작하지 않는다. 구현은 현재 요청된 Task 하나와 관련 테스트 또는 검증으로 제한한다.
+15. Approved Spec이 변경되면 Plan과 Tasks를, Approved Plan이 변경되면 Tasks를 재검토하며 일관성 확인 전까지 영향받는 구현을 중단한다.
+16. Spec, Plan 또는 Tasks가 README, ADR, Architecture나 Contract와 충돌하면 임의로 해석하지 않고 충돌 위치와 영향을 먼저 보고한다.
 
 ## 작업 단위와 사용자 협업
 
 * 하나의 Contract, 함수, 쿼리, 테스트 또는 명확한 책임 단위로 작업한다.
-* Feature 전체를 한 번에 구현하지 않고 현재 승인된 Task 하나의 범위만 처리한다.
+* Feature 전체를 한 번에 구현하지 않고 `tasks.md`에서 현재 승인·요청된 Task 하나의 범위만 처리한다.
 * 요구사항이 기존 Architecture나 ADR과 충돌하면 구현 전에 충돌 위치와 영향을 사용자에게 설명한다.
 * 의미 있는 설계 변경은 사용자의 결정 없이 임의로 확정하지 않는다.
 * 기존 코드와 문서에서 확인할 수 있는 내용은 사용자에게 다시 묻기 전에 먼저 조사한다.
