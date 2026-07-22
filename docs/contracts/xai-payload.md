@@ -23,7 +23,7 @@ MVP XAI Payload에는 최소한 다음 논리 정보가 포함된다.
 * 도메인별 데이터 기준일
 * 제한된 Result Summary
 * `truncated` 여부와 결과 한계
-* 실행 오류, 재시도 여부와 Self-Healing 횟수
+* 실행 오류와 실패 단계
 
 ## 불변조건
 
@@ -31,6 +31,8 @@ MVP XAI Payload에는 최소한 다음 논리 정보가 포함된다.
 * LLM은 Payload 범위 안에서만 자연어 설명을 작성한다.
 * 승인되지 않은 공식, 데이터 기준일 또는 인과관계를 새로 만들지 않는다.
 * `ProductInventory`를 일별 스냅샷으로 오해해 “최신 재고 스냅샷”이라고 단정하지 않는다.
+
+SQL Self-Healing을 도입할 경우 재시도 여부와 횟수는 Post-MVP Contract 확장에서 정의한다.
 
 ## 관련 문서
 

@@ -18,7 +18,7 @@ Result Handle은 데이터 전달 형식이나 권한 자체가 아니라 Backen
 
 ### A. MVP부터 모든 LLM에 Result Handle 적용
 
-하나의 결과 전달 경로만 유지할 수 있지만 Result Store, TTL, Handle Scope, Resolve와 Audit을 MVP에서 모두 구현해야 한다. 4주 MVP의 핵심인 Text-to-SQL과 2-Depth Workflow 검증 범위를 키우므로 채택하지 않는다.
+하나의 결과 전달 경로만 유지할 수 있지만 Result Store, TTL, Handle Scope, Resolve와 Audit을 MVP에서 모두 구현해야 한다. 3주 MVP의 핵심인 Text-to-SQL과 2-Depth Workflow 검증 범위를 키우므로 채택하지 않는다.
 
 ### B. Post-MVP에서도 모든 LLM에 결과 직접 전달
 
@@ -48,7 +48,7 @@ Private 모드는 MVP의 직접 전달 경로를 재사용하고 External 모드
 
 ### External 모드 Result Handle 불변조건
 
-1. Backend만 Handle을 해석할 수 있다. LLM이나 Slack Client는 Handle로 데이터를 직접 조회할 수 없다.
+1. Backend만 Handle을 해석할 수 있다. LLM이나 입력 채널 Client는 Handle로 데이터를 직접 조회할 수 없다.
 2. Handle은 데이터, SQL 또는 실행 권한으로 취급하지 않는다.
 3. Handle Resolve 시 현재 ACL, Correlation ID, Workflow Depth, 허용된 다음 행동과 TTL을 다시 검사한다.
 4. Handle은 활성 Workflow 안에서만 유효하며 요청 간에 임의로 재사용할 수 없다.

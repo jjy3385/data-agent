@@ -8,7 +8,7 @@
 |---|---|
 | [전체 아키텍처](overview.md) | 시스템 전체는 어떤 구성요소로 이루어지는가? |
 | [컴포넌트 경계](component-boundaries.md) | FastAPI, MCP Client Manager와 MCP Server의 책임은 무엇인가? |
-| [질문 처리 시퀀스](query-execution-sequence.md) | Slack 질문부터 최종 응답까지 어떤 순서로 처리하는가? |
+| [질문 처리 시퀀스](query-execution-sequence.md) | HTTP 자연어 질문부터 최종 응답까지 어떤 순서로 처리하는가? |
 | [프로젝트 구조](project-structure.md) | 각 책임을 어느 모듈에 구현하는가? |
 
 ## 문서 경계

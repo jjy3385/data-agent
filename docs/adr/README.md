@@ -10,9 +10,10 @@
 | [0002](0002-admin-db.md) | Governance용 Admin DB 분리 |
 | [0003](0003-virtual-fk.md) | 관리자 승인 Virtual FK만 사용 |
 | [0004](0004-agent-depth.md) | Agent Workflow Depth 제한 |
-| [0005](0005-self-healing.md) | SQL Self-Healing 횟수 제한 |
+| [0005](0005-self-healing.md) | Post-MVP SQL Self-Healing 횟수 제한 제안 |
 | [0006](0006-result-handle.md) | Post-MVP LLM 배포 모드별 Direct·Handle 결과 전달 전략 |
 | [0007](0007-local-stdio-mcp-db-boundary.md) | 로컬 stdio MCP를 대상 DB 실행 경계로 사용 |
+| [0008](0008-aws-demo-deployment.md) | 단일 EC2·EBS 기반 AWS 데모 배포 |
 
 ## 읽는 방법
 

@@ -17,3 +17,6 @@ docker/mssql/backups/*.back
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Admin DB (FEAT-0002)
+data/*.db*

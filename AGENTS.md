@@ -24,7 +24,7 @@
 | 정확한 입출력, 타입과 불변조건 | `docs/contracts/` |
 | 설계 결정, 대안과 선택 이유 | `docs/adr/` |
 | MVP 범위, 로드맵과 완료 기준 | `docs/mvp/` |
-| 현재 기능의 요구사항, 구현 계획과 실행 Task | `docs/features/` |
+| 현재 기능의 요구사항, 구현 계획과 실제 구현·검증 기록 | `docs/features/` |
 | 개발 작업 단위와 검토 절차 | `docs/development-protocol.md` |
 
 세부 문서를 찾기 어렵다면 `docs/README.md`에서 시작한다.
@@ -39,7 +39,7 @@
 4. SQL은 실행 전에 ACL, QueryPlan Validation, SQL Guardrail과 구조적 Plan-SQL Match를 통과해야 한다.
 5. 대상 DB 계정은 Read-Only이며 쓰기 권한을 부여하지 않는다.
 6. 권한, Metadata, Contract 또는 실행 안전성이 불확실하면 Fail Closed한다.
-7. MVP Workflow는 최대 Depth 2, SQL Self-Healing은 실행당 최대 1회로 제한한다.
+7. MVP Workflow는 최대 Depth 2로 제한한다. SQL Self-Healing은 Post-MVP이며, 구현하는 경우 실행당 최대 1회로 제한한다.
 8. 실제 Depth 2 대상과 PK는 Backend가 Depth 1 결과 범위 안에서 선택한다.
 9. MVP는 TOP N, 허용 컬럼과 Maximum Returned Rows가 적용된 Bounded Result를 Result Handle 없이 LLM에 직접 전달한다.
 10. Result Store와 Result Handle은 Post-MVP 범위다. Post-MVP 전달 전략은 `docs/adr/0006-result-handle.md`를 따른다.
@@ -67,17 +67,18 @@
 8. Timeout은 계층별로 구분한다. MCP Client Manager는 MCP Call Timeout, MCP Server는 DB Query Timeout을 담당한다.
 9. 새 기능에는 정상 경로뿐 아니라 권한 거부, Contract 오류, Timeout, 연결 종료와 Fail Closed 경로를 고려한다.
 10. 문서 상단에는 한글로 목적, 범위와 관련 문서를 설명하고 영어 기술 용어는 필요한 경우 병기한다.
-11. Feature 작업은 `Spec → Plan → Tasks → 구현` 순서를 따른다.
-12. `spec.md`가 `Approved`가 아니면 `plan.md`를 생성하지 않는다. Plan 작성·수정 요청에서는 구현 코드와 `tasks.md`를 만들지 않는다.
-13. `plan.md`가 `Approved`가 아니면 `tasks.md`를 생성하지 않는다. Tasks 작성·수정 요청에서는 구현 코드를 만들지 않는다.
-14. `tasks.md`가 `Approved`가 아니면 구현을 시작하지 않는다. 구현은 현재 요청된 Task 하나와 관련 테스트 또는 검증으로 제한한다.
-15. Approved Spec이 변경되면 Plan과 Tasks를, Approved Plan이 변경되면 Tasks를 재검토하며 일관성 확인 전까지 영향받는 구현을 중단한다.
-16. Spec, Plan 또는 Tasks가 README, ADR, Architecture나 Contract와 충돌하면 임의로 해석하지 않고 충돌 위치와 영향을 먼저 보고한다.
+11. Feature 작업은 `Spec → Plan → 구현·테스트 → Tasks 기록 → 구현 검토` 순서를 따른다.
+12. `spec.md`가 `Approved`가 아니면 `plan.md`를 생성하지 않는다. Plan 작성·수정 단계에서는 구현 코드와 `tasks.md`를 만들지 않는다.
+13. `plan.md`가 `Approved`가 아니면 구현을 시작하지 않는다. Approved Plan은 해당 Feature 전체의 구현과 관련 테스트를 수행할 수 있는 승인 기준이다.
+14. 구현과 검증이 끝나면 실제 변경, 테스트 결과, Plan과의 차이와 남은 위험을 기준으로 `tasks.md`를 `Review` 상태로 생성하거나 갱신한다. `tasks.md`는 구현 전 승인 문서가 아니다.
+15. 구현 중 Approved Plan과 다른 중요한 설계, 공개 경계, 의존성 또는 파일 책임이 필요하면 작업을 중단하고 Plan을 수정·재검토한다. Approved Spec이 변경되면 Plan을 재검토하고 일관성 확인 전까지 영향받는 구현을 중단한다.
+16. Spec, Plan, 구현 또는 Tasks 기록이 README, ADR, Architecture나 Contract와 충돌하면 임의로 해석하지 않고 충돌 위치와 영향을 먼저 보고한다.
+17. Codex 구현 검토의 발견 사항과 처리 결과를 `tasks.md`에 기록하고 모든 완료 조건을 충족한 뒤에만 `Verified`로 변경한다.
 
 ## 작업 단위와 사용자 협업
 
-* 하나의 Contract, 함수, 쿼리, 테스트 또는 명확한 책임 단위로 작업한다.
-* Feature 전체를 한 번에 구현하지 않고 `tasks.md`에서 현재 승인·요청된 Task 하나의 범위만 처리한다.
+* 하나의 요청은 하나의 Approved Feature Plan 또는 명확한 책임 단위로 제한한다. 여러 Roadmap Feature를 한 번에 구현하지 않는다.
+* Approved Plan 범위에서는 Feature 전체 구현과 관련 테스트를 함께 수행할 수 있으며, AI Agent는 내부 구현 순서를 검토 가능한 단위로 나눈다.
 * 요구사항이 기존 Architecture나 ADR과 충돌하면 구현 전에 충돌 위치와 영향을 사용자에게 설명한다.
 * 의미 있는 설계 변경은 사용자의 결정 없이 임의로 확정하지 않는다.
 * 기존 코드와 문서에서 확인할 수 있는 내용은 사용자에게 다시 묻기 전에 먼저 조사한다.

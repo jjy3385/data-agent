@@ -10,7 +10,7 @@
 4. [MVP 로드맵](mvp/roadmap.md): 현재 위치와 다음 작업
 5. [MVP 완료 기준](mvp/acceptance-criteria.md): 완료 여부를 판단하는 조건
 
-특정 기능을 진행할 때는 위 기준 문서와 함께 Roadmap에 연결된 [Feature 기반 개발 안내](features/README.md)와 현재 단계의 Spec, Plan 또는 Tasks를 확인한다.
+특정 기능을 진행할 때는 위 기준 문서와 함께 Roadmap에 연결된 [Feature 기반 개발 안내](features/README.md)와 현재 단계의 Spec, Plan 또는 Tasks 기록을 확인한다.
 
 ## 문서 종류
 
@@ -20,7 +20,7 @@
 | 정확한 입출력 형식은 무엇인가? | [Contract](contracts/README.md) | RuntimeIntent, QueryPlan, Tool, XAI 계약 |
 | 구성요소가 어떻게 연결되는가? | [Architecture](architecture/README.md) | 컴포넌트 책임, 시퀀스와 프로젝트 구조 |
 | MVP에서 어디까지 만드는가? | [MVP](mvp/README.md) | 범위, 로드맵과 완료 기준 |
-| 이번 기능은 무엇이고 어떻게 구현할 것인가? | [Feature 개발 문서](features/README.md) | Spec, Plan과 Tasks의 단계별 기준 |
+| 이번 기능은 무엇이고 어떻게 구현·검증했는가? | [Feature 개발 문서](features/README.md) | Spec, Plan과 사후 Tasks 기록의 기준 |
 | 테스트 DB 구조는 무엇인가? | [Data](data/README.md) | AdventureWorks2022 스키마 참고 자료 |
 | AI와 어떻게 개발하는가? | [개발 프로토콜](development-protocol.md) | 작업 단위와 검토 절차 |
 
@@ -28,6 +28,6 @@
 
 * 한글 설명을 먼저 작성하고 영어 기술 용어는 필요한 경우 병기한다.
 * 문서 상단만 읽어도 목적, 범위와 관련 문서를 파악할 수 있어야 한다.
-* ADR은 결정 이유, Contract는 정확한 형식, Architecture는 연결 관계, Feature의 Spec·Plan·Tasks는 요구사항·기술 계획·실행 작업을 각각 담당한다.
+* ADR은 결정 이유, Contract는 정확한 형식, Architecture는 연결 관계, Feature의 Spec·Plan·Tasks는 요구사항·기술 계획·실제 구현과 검증 기록을 각각 담당한다.
 * 같은 규칙을 여러 문서에 복사하지 않고 기준 문서를 링크한다.
 * 구현과 문서가 다르면 안전을 위해 Fail Closed하고 문서를 먼저 정정한다.

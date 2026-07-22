@@ -37,7 +37,7 @@
 
 `LLM_DEPLOYMENT_MODE=external`은 실행 결과를 Backend Result Store에 보관한다. LLM에는 불투명한 Result Handle과 현재 판단에 필요한 최소 Summary 또는 Projection만 전달한다.
 
-Backend는 Handle Resolve 시 ACL, Correlation ID, Workflow Depth, 허용된 다음 행동과 TTL을 다시 검사한다. LLM이나 Slack Client는 Handle로 결과를 직접 조회할 수 없다.
+Backend는 Handle Resolve 시 ACL, Correlation ID, Workflow Depth, 허용된 다음 행동과 TTL을 다시 검사한다. LLM이나 입력 채널 Client는 Handle로 결과를 직접 조회할 수 없다.
 
 ## 공통 불변조건
 

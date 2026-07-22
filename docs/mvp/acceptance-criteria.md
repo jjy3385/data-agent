@@ -8,6 +8,10 @@ Golden Query는 사람이 업무 정의와 결과를 검증한 기준 SQL이다.
 
 ## 완료 체크리스트
 
+* [ ] 자연어 질문이 FastAPI를 통해 접수되고 승인된 MCP Tool의 실제 MSSQL 조회 결과까지 이어진다.
+* [ ] Jinja2 기반 데모 웹 UI에서 자연어 질문과 제한된 결과를 확인할 수 있다.
+* [ ] 데모 웹 UI에서 Business·Physical Metadata와 승인된 AdventureWorks Sample 데이터를 읽기 전용으로 확인할 수 있다.
+* [ ] Physical Metadata는 대상 DB Schema Inspection 결과로 구성되고 Business Metadata의 업무 의미를 자동 추론하지 않는다.
 * [ ] Depth 1과 Depth 2에 대해 검토·승인된 Golden Query와 예상 결과가 있다.
 * [ ] 자연스러운 대표 질문에서 Schema를 준수하는 RuntimeIntent가 생성된다.
 * [ ] RuntimeIntent와 ACL로 검색된 승인 Metadata만 Query Planner Context에 포함된다.
@@ -26,13 +30,14 @@ Golden Query는 사람이 업무 정의와 결과를 검증한 기준 SQL이다.
 * [ ] MCP Client Manager는 MCP Call Timeout을 적용한다.
 * [ ] Read-Only Query Executor는 DB Query Timeout과 Maximum Returned Rows를 강제한다.
 * [ ] 공유 MCP Client Session을 사용하는 대상 DB 실행 요청은 Backend에서 직렬화된다.
-* [ ] Agent Workflow는 최대 Depth 2, SQL Self-Healing은 실행당 1회를 초과하지 않는다.
-* [ ] LLM Client는 Provider 교체가 가능한 공통 인터페이스를 사용한다.
+* [ ] Agent Workflow는 최대 Depth 2를 초과하지 않는다.
+* [ ] 설정된 단일 LLM Provider로 대표 질문을 처리하고 설정이 없거나 유효하지 않으면 Fail Closed한다.
 * [ ] Depth 2 판단에는 TOP N, 허용 컬럼과 Maximum Returned Rows가 적용된 Bounded Result를 Result Handle 없이 LLM에 직접 전달한다.
 * [ ] LLM Next Action은 허용 행동으로 제한하고 Depth 2 대상은 Backend가 Depth 1 결과 안에서 선택한다.
-* [ ] Slack 응답에 기준일, 계산식, 판단 근거와 데이터 한계가 포함된다.
+* [ ] 최종 응답에 기준일, 계산식, 판단 근거와 데이터 한계가 포함되고 데모 웹 UI에서 확인할 수 있다.
 * [ ] Intent, Context, Plan, SQL, Bounded Result와 실행 단계가 하나의 Correlation ID로 연결된다.
-* [ ] 오류 신고가 원래 실행 이력과 연결된다.
+* [ ] 사용자·역할·Table Policy를 적용한 Depth 1 대표 질문이 AWS 데모 환경에서 동작한다.
+* [ ] 단일 EC2 재시작 또는 애플리케이션 재배포 후 EBS의 Admin DB 데이터가 유지된다.
 
 ## 관련 문서
 

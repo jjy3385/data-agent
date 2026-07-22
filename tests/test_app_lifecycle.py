@@ -15,7 +15,7 @@ def _shutdown_records(records):
     return [r for r in records if r.name == "app.core.lifespan" and r.message == "Application shutdown"]
 
 
-def test_lifespan_logs_startup_and_shutdown_exactly_once(caplog):
+def test_lifespan_logs_startup_and_shutdown_exactly_once(caplog, admin_db_path):
     test_app = FastAPI(lifespan=lifespan)
 
     with caplog.at_level(logging.INFO, logger="app.core.lifespan"):
@@ -27,7 +27,7 @@ def test_lifespan_logs_startup_and_shutdown_exactly_once(caplog):
         assert len(_shutdown_records(caplog.records)) == 1
 
 
-def test_main_app_lifespan_logs_startup_and_shutdown_exactly_once(caplog):
+def test_main_app_lifespan_logs_startup_and_shutdown_exactly_once(caplog, admin_db_path):
     with caplog.at_level(logging.INFO, logger="app.core.lifespan"):
         with TestClient(main_app) as client:
             assert len(_startup_records(caplog.records)) == 1
