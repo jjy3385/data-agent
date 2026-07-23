@@ -2,7 +2,7 @@
 
 ## 상태 (Status)
 
-제안됨 (Proposed)
+승인됨 (Accepted)
 
 ## 배경 (Context)
 

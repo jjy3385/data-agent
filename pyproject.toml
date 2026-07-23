@@ -9,6 +9,8 @@ dependencies = [
     "pydantic-settings>=2.6,<3.0",
     "sqlalchemy>=2.0,<3.0",
     "alembic>=1.13,<2.0",
+    "mcp>=1.28,<2",
+    "pyodbc>=5.3,<6",
 ]
 
 [dependency-groups]
@@ -19,3 +21,6 @@ dev = [
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+markers = [
+    "requires_target_db: requires a live Docker MSSQL target database (TARGET_DB_*)",
+]
