@@ -11,6 +11,7 @@ dependencies = [
     "alembic>=1.13,<2.0",
     "mcp>=1.28,<2",
     "pyodbc>=5.3,<6",
+    "openai>=2.8,<3",
 ]
 
 [dependency-groups]
@@ -23,4 +24,5 @@ dev = [
 pythonpath = ["."]
 markers = [
     "requires_target_db: requires a live Docker MSSQL target database (TARGET_DB_*)",
+    "requires_llm: requires RUN_LLM_TESTS=1 and a configured LLM Provider (LLM_*)",
 ]

@@ -6,6 +6,7 @@
 
 | 계약 | 설명 |
 |---|---|
+| [자연어 질문 API](natural-language-query.md) | 자연어 질문 HTTP 요청과 Bounded Result·명확화·거부·실패 응답 계약 |
 | [RuntimeIntent](runtime-intent.md) | 자연어 질문을 Metadata 검색 입력으로 구조화한 계약 |
 | [QueryPlan](query-plan.md) | 자연어와 SQL 사이의 검증 가능한 실행 계획 계약 |
 | [`inspect_schema`](inspect-schema.md) | AdventureWorks2022의 사용자 정의 Physical Schema를 읽기 전용으로 수집하는 MCP Tool 입출력 계약 |

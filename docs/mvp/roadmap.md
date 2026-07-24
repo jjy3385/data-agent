@@ -21,7 +21,8 @@ MVP는 먼저 자연어 질문이 실제 데이터 조회 결과까지 이어지
   * Schema Inspection과 Physical Metadata 구성
   * 제한된 Read-Only Query 실행
 
-* [ ] FEAT-0004 자연어 질문 처리 최소 동작 흐름 (Walking Skeleton)
+* [x] FEAT-0004 자연어 질문 처리 최소 동작 흐름 (Walking Skeleton)
+  * Feature: [FEAT-0004 자연어 질문 처리 최소 동작 흐름 명세](../features/0004-natural-language-query-walking-skeleton/spec.md)
   * 대표 재고 질문 하나를 처리하는 자연어 질문 API
   * 최소 Business Metadata, RuntimeIntent와 QueryPlan
   * LLM SQL 생성부터 Bounded Result 반환까지 연결
